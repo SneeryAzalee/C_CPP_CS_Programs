@@ -1,26 +1,54 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+// Make a program that will INSERT a value to an array
 
 int main()
 {
-    int whole, place = 0;
-    double input, decimal;
-    scanf("%lf", &input);
+    int input_count;
     
-    whole = (int)input;
-    decimal = input - (double)whole;
+    printf("\n\nEnter number of inputs: ");
+    scanf("%d", &input_count);
     
-    printf("\n\n@ INITIAL @\nWhole = %d\nDecimal = %lf\nPlace = %d\n", whole, decimal, place);
+    int array[input_count + 1];
     
-    for(int i = 0; decimal != 0; i++)
+    for(int i = 0; i < input_count; i++)
     {
-        input *= 10;
-        whole = (int)input;
-        decimal = input - (double)whole;
-        place++;
-        printf("\n\nWhole = %d\nDecimal = %lf\nPlace = %d\n", whole, decimal, place);
+        printf("%d. ", i + 1);
+        scanf("%d", &array[i]);
     }
     
-    printf("\n\n@ FINAL @\nWhole = %d\nDecimal = %lf\nPlace = %d\n", whole, decimal, place);
+    printf("\n\n");
+    for(int i = 0; i < input_count; i++)
+    {
+        printf("%d  ", array[i]);
+    }
+    printf("\n\n");
+    
+    
+    int input, index, temp;
+    
+    printf("Enter a number: ");
+    scanf("%d", &input);
+    
+    printf("\nEnter index: ");
+    scanf("%d", &index);
+    printf("\n\n");
+    
+    for(int i = index; i < input_count + 1; i++)
+    {
+        temp = array[i];
+        array[i] = input;
+        input = temp;
+    }
+    
+    printf("\n\n");
+    for(int i = 0; i < input_count + 1; i++)
+    {
+        printf("%d  ", array[i]);
+    }
+    printf("\n\n");
+    
     
     return 0;
 }
