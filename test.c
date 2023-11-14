@@ -1,17 +1,18 @@
 #include <stdio.h>
+#include <conio.h>
 
-//####################################################
-#include "/storage/emulated/0/Download/CodingC/emma_watson.h"
-//####################################################
+int main() {
+  while (1) {
+    printf("This line will print repeatedly until you press enter.\n");
 
-int main()
-{
-    char input[2][200];
+    if (kbhit()) {
+      if (getch() == '\n') {
+        break;
+      }
+    }
     
-    printf("\n\nEnter your name: ");
-    scanf("%[^\n]s", &input[0]);
-    
-    watson(input[0]);
-    
-    return 0;
+    usleep(10 * 1000);
+  }
+
+  return 0;
 }
