@@ -8,7 +8,10 @@
 int main()
 {
     // Initialization
-    int millisecond = 0, second = 0, minute = 0, delay_ms = 10;
+    int millisecond = 0, second = 0, minute = 0, delay_ms = 10, alarm, interval = 5;
+    
+    // Assignment
+    alarm = interval;
     
     // Stopwatch
     for(;;)
@@ -76,6 +79,13 @@ int main()
                     printf("\e[1;1H%d", minute);
                 }
             }
+        }
+        
+        // Alarm
+        if(minute == alarm)
+        {
+            printf("\a");
+            alarm += interval;
         }
         
         // Stopwatch controls and multiplier
