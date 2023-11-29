@@ -48,7 +48,7 @@ int main()
             {
                 if(prime(i) && prime(j))
                 {
-                    printf("\e[1;30m•  \e[1;32m%lld \e[1;36m+ \e[1;32m%lld\n", i, j);
+                    printf("\e[1;30m>  \e[1;32m%lld \e[1;36m+ \e[1;32m%lld\n", i, j);
                 }
                 
                 break;
