@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 
 // Make a program that will solve for different geometrical areas.
 
@@ -125,8 +126,10 @@ int main()
         // Declare mode selector
         int mode = 0;
 
+        // Clear the screen
+        printf("\e[2J\e[H");
+
         // Mode Selector
-        printf("\n\n");
         printf("#################################\n");
         printf("######## AREA CALCULATOR ########\n");
         printf("#################################\n");
@@ -137,16 +140,25 @@ int main()
         printf("\n4. Circle");
         printf("\n5. Trapezoid");
         printf("\n6. Ellipse");
-        printf("\n\n\(Enter any other character to exit\)\n");
-        printf("\n>> Enter choice: ");
+        printf("\n\n\(Enter any other character to exit\)\n\n");
 
-        scanf("%s", &mode);
+        // Store choice upon key press
+        for(;;)
+        {
+            if(kbhit())
+            {
+                mode = getch();
+                break;
+            }
+        }
 
         // 0. Unit Converter
         if(mode == 48)
         {
+            // Clear the screen
+            printf("\e[2J\e[H");
+
             // Print title
-            printf("\n\n");
             printf("#################################\n");
             printf("######## UNIT  CONVERTER ########\n");
             printf("#################################\n");
@@ -159,6 +171,7 @@ int main()
             // Get input unit
             while(input_unit >= 49 ^ input_unit <= 56)
             {
+                printf("\e[4H\e[0J");
                 printf("\nSelect the unit for the input:\n\n");
                 printf("1. Millimeters (mm)\n");
                 printf("2. Centimeters (cm)\n");
@@ -167,23 +180,38 @@ int main()
                 printf("5. Inches (in)\n");
                 printf("6. Feet (ft)\n");
                 printf("7. Yards (yd)\n");
-                printf("8. Miles (mi)\n");
-                printf("\n>> Enter choice: ");
-                
-                scanf("%s", &input_unit);
-                while(getchar() != '\n');
-                    
+                printf("8. Miles (mi)\n\n");
+
+                // Store choice upon key press
+                for(;;)
+                {
+                    if(kbhit())
+                    {
+                        input_unit = getch();
+                        break;
+                    }
+                }
+
                 // If input is invalid
                 if(input_unit >= 49 ^ input_unit <= 56)
                 {
                     int choice = 0;
-                        
+
+                    printf("\e[4H\e[0J");
                     printf("\nYou entered an invalid input!\n\n");
                     printf("\n1. Try again\n");
-                    printf("\n(Enter any other value to return to the main menu)\n");
-                    printf("\n>> Enter choice: ");
-                    scanf("%s", &choice);
-                        
+                    printf("\n(Enter any other value to return to the main menu)\n\n");
+
+                    // Store choice upon key press
+                    for(;;)
+                    {
+                        if(kbhit())
+                        {
+                            choice = getch();
+                            break;
+                        }
+                    }
+
                     // Return to main menu
                     if(choice != 49)
                     {
@@ -192,28 +220,38 @@ int main()
                     }
                 }
             }
-            
+
             // Get input
             if(valid == 1)
             {
                 // Check if user enters a valid number
                 while(input <= 0 && valid == 1)
                 {
+                    printf("\e[4H\e[0J");
                     printf("\n>> Input (%s) : ", units[input_unit - 49]);
-                    scanf("%lf", &input);
+                    scanf("%Lf", &input);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(input <= 0)
                     {
                         int choice = 0;
-                        
+
+                        printf("\e[4H\e[0J");
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
-                        printf("\n(Enter any other value to return to the main menu)\n");
-                        printf("\n>> Enter choice: ");
-                        scanf("%s", &choice);
+                        printf("\n(Enter any other value to return to the main menu)\n\n");
                         
+                        // Store choice upon key press
+                        for(;;)
+                        {
+                            if(kbhit())
+                            {
+                                choice = getch();
+                                break;
+                            }
+                        }
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -222,13 +260,15 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if valid is true
             if(valid == 1)
             {
                 // Get result unit
                 while(result_unit >= 49 ^ result_unit <= 56)
                 {
+                    printf("\e[4H\e[0J");
+                    printf("\n>> Input (%s) : %Lf\n", units[input_unit - 49], input);
                     printf("\nSelect the unit for the result:\n\n");
                     printf("1. Millimeters (mm)\n");
                     printf("2. Centimeters (cm)\n");
@@ -237,23 +277,38 @@ int main()
                     printf("5. Inches (in)\n");
                     printf("6. Feet (ft)\n");
                     printf("7. Yards (yd)\n");
-                    printf("8. Miles (mi)\n");
-                    printf("\n>> Enter choice: ");
-                
-                    scanf("%s", &result_unit);
-                    while(getchar() != '\n');
-                    
+                    printf("8. Miles (mi)\n\n");
+
+                    // Store choice upon key press
+                    for(;;)
+                    {
+                        if(kbhit())
+                        {
+                            result_unit = getch();
+                            break;
+                        }
+                    }
+
                     // If input is invalid
                     if(result_unit >= 49 ^ result_unit <= 56)
                     {
                         int choice = 0;
-                        
+
+                        printf("\e[4H\e[0J");
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
-                        printf("\n(Enter any other value to return to the main menu)\n");
-                        printf("\n>> Enter choice: ");
-                        scanf("%s", &choice);
+                        printf("\n(Enter any other value to return to the main menu)\n\n");
                         
+                        // Store choice upon key press
+                        for(;;)
+                        {
+                            if(kbhit())
+                            {
+                                choice = getch();
+                                break;
+                            }
+                        }
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -263,14 +318,14 @@ int main()
                     }
                 }
             }
-            
+
             // Preview given before calculation
             if(valid == 1)
             {
-                printf("\n\n#############################\n");
-                printf("Input: %lf %s\n", input, units[input_unit - 49]);
+                printf("\e[4H\e[0J");
+                printf("\nInput: %Lf %s\n", input, units[input_unit - 49]);
             }
-            
+
             // Calculate the result
             if(valid == 1)
             {
@@ -280,25 +335,34 @@ int main()
             // Print Result
             if(valid == 1)
             {
-                printf("\nResult: %lf %s", result, units[result_unit - 49]);
-                printf("\n#############################\n");
+                printf("\nResult: %Lf %s\n", result, units[result_unit - 49]);
+                printf("\n#################################\n");
             }
-            
+
             // Continue?
             if(valid == 1)
             {
                 printf("\n\n1. Calculate another\n");
-                printf("\n\(Enter any other character to exit\)\n");
-                printf("\n>> Enter choice: ");
-    
-                scanf("%s", &flag);
+                printf("\n\(Enter any other character to exit\)\n\n");
+
+                // Store choice upon key press
+                for(;;)
+                {
+                    if(kbhit())
+                    {
+                        flag = getch();
+                        break;
+                    }
+                }
             }
         }
         // 1. Rectangle
         else if(mode == 49)
         {
+            // Clear the screen
+            printf("\e[2J\e[H");
+            
             // Print title
-            printf("\n\n");
             printf("#################################\n");
             printf("###### AREA OF A RECTANGLE ######\n");
             printf("#################################\n");
@@ -310,6 +374,7 @@ int main()
             char units_area[][5] = {"mm²", "cm²", "m²", "km²", "in²", "ft²", "yd²", "mi²"};
 
             // Get length unit
+            printf("\e[4H\e[0J");
             printf("\nSelect the unit for the length:\n\n");
             printf("1. Millimeters (mm)\n");
             printf("2. Centimeters (cm)\n");
@@ -319,14 +384,21 @@ int main()
             printf("6. Feet (ft)\n");
             printf("7. Yards (yd)\n");
             printf("8. Miles (mi)\n");
-            printf("\n(Enter any other value for non-units)\n");
-            printf("\n>> Enter choice: ");
-            scanf("%s", &length_unit);
+            printf("\n(Enter any other value for non-units)\n\n");
+            
+            // Store choice upon key press
+            for(;;)
+            {
+                if(kbhit())
+                {
+                    length_unit = getch();
+                    break;
+                }
+            }
 
             // Check if it has a unit or a non-unit
             if(length_unit >= 49 ^ length_unit <= 56)
             {
-                printf("\nYou've chosen a non-unit calculation.\n\n");
                 unit_flag = 0;
             }
 
@@ -336,21 +408,31 @@ int main()
                 // Check if user enters a valid number
                 while(length <= 0 && valid == 1)
                 {
+                    printf("\e[4H\e[0J");
                     printf("\n>> Length (%s) : ", units[length_unit - 49]);
-                    scanf("%lf", &length);
+                    scanf("%Lf", &length);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(length <= 0)
                     {
                         int choice = 0;
-                        
+
+                        printf("\e[4H\e[0J");
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
-                        printf("\n(Enter any other value to return to the main menu)\n");
-                        printf("\n>> Enter choice: ");
-                        scanf("%s", &choice);
+                        printf("\n(Enter any other value to return to the main menu)\n\n");
                         
+                        // Store choice upon key press
+                        for(;;)
+                        {
+                            if(kbhit())
+                            {
+                                choice = getch();
+                                break;
+                            }
+                        }
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -369,21 +451,31 @@ int main()
                 // Check if user enters a valid number
                 while(length <= 0 && valid == 1)
                 {
+                    printf("\e[4H\e[0J");
                     printf("\n>> Length: ");
-                    scanf("%lf", &length);
+                    scanf("%Lf", &length);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(length <= 0)
                     {
                         int choice = 0;
-                        
+
+                        printf("\e[4H\e[0J");
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
-                        printf("\n(Enter any other value to return to the main menu)\n");
-                        printf("\n>> Enter choice: ");
-                        scanf("%s", &choice);
+                        printf("\n(Enter any other value to return to the main menu)\n\n");
                         
+                        // Store choice upon key press
+                        for(;;)
+                        {
+                            if(kbhit())
+                            {
+                                choice = getch();
+                                break;
+                            }
+                        }
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -397,11 +489,13 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
                 // Get width unit
+                printf("\e[4H\e[0J");
+                printf("\n>> Length (%s) : %Lf", units[length_unit - 49], length);
                 printf("\n\nSelect the unit for the width:\n\n");
                 printf("1. Millimeters (mm)\n");
                 printf("2. Centimeters (cm)\n");
@@ -411,39 +505,57 @@ int main()
                 printf("6. Feet (ft)\n");
                 printf("7. Yards (yd)\n");
                 printf("8. Miles (mi)\n");
-                printf("\n(Enter any other value for non-units)\n");
-                printf("\n>> Enter choice: ");
-                scanf("%s", &width_unit);
+                printf("\n(Enter any other value for non-units)\n\n");
                 
+                // Store choice upon key press
+                for(;;)
+                {
+                    if(kbhit())
+                    {
+                        width_unit = getch();
+                        break;
+                    }
+                }
+
                 // Check if it has a unit or a non-unit
                 if(width_unit >= 49 ^ width_unit <= 56)
                 {
-                    printf("\nYou've chosen a non-unit calculation.\n\n");
                     unit_flag = 0;
                 }
             }
-            
+
             // Get width
             if(unit_flag == 1 && valid == 1)
             {
                 // Check if user enters a valid number
                 while(width <= 0 && valid == 1)
                 {
+                    printf("\e[4H\e[0J");
+                    printf("\n>> Length (%s) : %Lf", units[length_unit - 49], length);
                     printf("\n>> Width (%s) : ", units[width_unit - 49]);
-                    scanf("%lf", &width);
+                    scanf("%Lf", &width);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(width <= 0)
                     {
                         int choice = 0;
-                        
+
+                        printf("\e[4H\e[0J");
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
-                        printf("\n(Enter any other value to return to the main menu)\n");
-                        printf("\n>> Enter choice: ");
-                        scanf("%s", &choice);
+                        printf("\n(Enter any other value to return to the main menu)\n\n");
                         
+                        // Store choice upon key press
+                        for(;;)
+                        {
+                            if(kbhit())
+                            {
+                                choice = getch();
+                                break;
+                            }
+                        }
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -462,21 +574,32 @@ int main()
                 // Check if user enters a valid number
                 while(width <= 0 && valid == 1)
                 {
+                    printf("\e[4H\e[0J");
+                    printf("\n>> Length: %Lf", length);
                     printf("\n>> Width: ");
-                    scanf("%lf", &width);
+                    scanf("%Lf", &width);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(width <= 0)
                     {
                         int choice = 0;
-                        
+
+                        printf("\e[4H\e[0J");
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
-                        printf("\n(Enter any other value to return to the main menu)\n");
-                        printf("\n>> Enter choice: ");
-                        scanf("%s", &choice);
+                        printf("\n(Enter any other value to return to the main menu)\n\n");
                         
+                        // Store choice upon key press
+                        for(;;)
+                        {
+                            if(kbhit())
+                            {
+                                choice = getch();
+                                break;
+                            }
+                        }
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -490,7 +613,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -507,7 +630,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &area_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(area_unit >= 49 ^ area_unit <= 56)
                 {
@@ -515,19 +638,19 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Preview given before calculation
             if(unit_flag == 1 && valid == 1)
             {
                 printf("\n\n#############################\n");
-                printf("Length: %lf %s\n", length, units[length_unit - 49]);
-                printf("Width: %lf %s\n", width, units[width_unit - 49]);
+                printf("Length: %Lf %s\n", length, units[length_unit - 49]);
+                printf("Width: %Lf %s\n", width, units[width_unit - 49]);
             }
             else if(unit_flag == 0 && valid == 1)
             {
                 printf("\n\n#############################\n");
-                printf("Length: %lf\n", length);
-                printf("Width: %lf\n", width);
+                printf("Length: %Lf\n", length);
+                printf("Width: %Lf\n", width);
             }
 
             // Calculate the area
@@ -543,22 +666,22 @@ int main()
             // Print Area
             if(unit_flag == 1 && valid == 1)
             {
-                printf("\nArea: %lf %s", area, units_area[area_unit - 49]);
+                printf("\nArea: %Lf %s", area, units_area[area_unit - 49]);
                 printf("\n#############################\n");
             }
             else if(unit_flag == 0 && valid == 1)
             {
-                printf("\nArea: %lf", area);
+                printf("\nArea: %Lf", area);
                 printf("\n#############################\n");
             }
-            
+
             // Continue?
             if(valid == 1)
             {
                 printf("\n\n1. Calculate another\n");
                 printf("\n\(Enter any other character to exit\)\n");
                 printf("\n>> Enter choice: ");
-    
+
                 scanf("%s", &flag);
             }
         }
@@ -607,18 +730,18 @@ int main()
                     printf("\n>> Side (%s) : ", units[side_unit - 49]);
                     scanf("%lf", &side);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(side <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -640,18 +763,18 @@ int main()
                     printf("\n>> Side: ");
                     scanf("%lf", &side);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(side <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -665,7 +788,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -682,7 +805,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &area_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(area_unit >= 49 ^ area_unit <= 56)
                 {
@@ -690,7 +813,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Preview given before calculation
             if(unit_flag == 1 && valid == 1)
             {
@@ -724,14 +847,14 @@ int main()
                 printf("\nArea: %lf", area);
                 printf("\n#############################\n");
             }
-            
+
             // Continue?
             if(valid == 1)
             {
                 printf("\n\n1. Calculate another\n");
                 printf("\n\(Enter any other character to exit\)\n");
                 printf("\n>> Enter choice: ");
-    
+
                 scanf("%s", &flag);
             }
         }
@@ -780,18 +903,18 @@ int main()
                     printf("\n>> Base (%s) : ", units[base_unit - 49]);
                     scanf("%lf", &base);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(base <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -813,18 +936,18 @@ int main()
                     printf("\n>> Base: ");
                     scanf("%lf", &base);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(base <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -838,7 +961,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -855,7 +978,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &height_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(height_unit >= 49 ^ height_unit <= 56)
                 {
@@ -863,7 +986,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Get height
             if(unit_flag == 1 && valid == 1)
             {
@@ -873,18 +996,18 @@ int main()
                     printf("\n>> Height (%s) : ", units[height_unit - 49]);
                     scanf("%lf", &height);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(height <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -906,18 +1029,18 @@ int main()
                     printf("\n>> Height: ");
                     scanf("%lf", &height);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(height <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -931,7 +1054,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -948,7 +1071,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &area_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(area_unit >= 49 ^ area_unit <= 56)
                 {
@@ -956,7 +1079,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Preview given before calculation
             if(unit_flag == 1 && valid == 1)
             {
@@ -992,14 +1115,14 @@ int main()
                 printf("\nArea: %lf", area);
                 printf("\n#############################\n");
             }
-            
+
             // Continue?
             if(valid == 1)
             {
                 printf("\n\n1. Calculate another\n");
                 printf("\n\(Enter any other character to exit\)\n");
                 printf("\n>> Enter choice: ");
-    
+
                 scanf("%s", &flag);
             }
         }
@@ -1048,18 +1171,18 @@ int main()
                     printf("\n>> Radius (%s) : ", units[radius_unit - 49]);
                     scanf("%lf", &radius);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(radius <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1081,18 +1204,18 @@ int main()
                     printf("\n>> Radius: ");
                     scanf("%lf", &radius);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(radius <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1106,7 +1229,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -1123,7 +1246,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &area_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(area_unit >= 49 ^ area_unit <= 56)
                 {
@@ -1131,7 +1254,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Preview given before calculation
             if(unit_flag == 1 && valid == 1)
             {
@@ -1165,14 +1288,14 @@ int main()
                 printf("\nArea: %lf", area);
                 printf("\n#############################\n");
             }
-            
+
             // Continue?
             if(valid == 1)
             {
                 printf("\n\n1. Calculate another\n");
                 printf("\n\(Enter any other character to exit\)\n");
                 printf("\n>> Enter choice: ");
-    
+
                 scanf("%s", &flag);
             }
         }
@@ -1221,18 +1344,18 @@ int main()
                     printf("\n>> Base A (%s) : ", units[base_a_unit - 49]);
                     scanf("%lf", &base_a);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(base_a <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1254,18 +1377,18 @@ int main()
                     printf("\n>> Base A: ");
                     scanf("%lf", &base_a);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(base_a <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1279,7 +1402,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -1296,7 +1419,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &base_b_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(base_b_unit >= 49 ^ base_b_unit <= 56)
                 {
@@ -1304,7 +1427,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Get base B
             if(unit_flag == 1 && valid == 1)
             {
@@ -1314,18 +1437,18 @@ int main()
                     printf("\n>> Base B (%s) : ", units[base_b_unit - 49]);
                     scanf("%lf", &base_b);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(base_b <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1347,18 +1470,18 @@ int main()
                     printf("\n>> Base B: ");
                     scanf("%lf", &base_b);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(base_b <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1372,7 +1495,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -1389,7 +1512,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &height_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(height_unit >= 49 ^ height_unit <= 56)
                 {
@@ -1397,7 +1520,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Get height
             if(unit_flag == 1 && valid == 1)
             {
@@ -1407,18 +1530,18 @@ int main()
                     printf("\n>> Height (%s) : ", units[height_unit - 49]);
                     scanf("%lf", &height);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(height <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1440,18 +1563,18 @@ int main()
                     printf("\n>> Height: ");
                     scanf("%lf", &height);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(height <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1465,7 +1588,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -1482,7 +1605,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &area_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(area_unit >= 49 ^ area_unit <= 56)
                 {
@@ -1490,7 +1613,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Preview given before calculation
             if(unit_flag == 1 && valid == 1)
             {
@@ -1528,14 +1651,14 @@ int main()
                 printf("\nArea: %lf", area);
                 printf("\n#############################\n");
             }
-            
+
             // Continue?
             if(valid == 1)
             {
                 printf("\n\n1. Calculate another\n");
                 printf("\n\(Enter any other character to exit\)\n");
                 printf("\n>> Enter choice: ");
-    
+
                 scanf("%s", &flag);
             }
         }
@@ -1584,18 +1707,18 @@ int main()
                     printf("\n>> Axis A (%s) : ", units[axis_a_unit - 49]);
                     scanf("%lf", &axis_a);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(axis_a <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1617,18 +1740,18 @@ int main()
                     printf("\n>> Axis A: ");
                     scanf("%lf", &axis_a);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(axis_a <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1642,7 +1765,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -1659,7 +1782,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &axis_b_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(axis_b_unit >= 49 ^ axis_b_unit <= 56)
                 {
@@ -1667,7 +1790,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Get axis B
             if(unit_flag == 1 && valid == 1)
             {
@@ -1677,18 +1800,18 @@ int main()
                     printf("\n>> Axis B (%s) : ", units[axis_b_unit - 49]);
                     scanf("%lf", &axis_b);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(axis_b <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1710,18 +1833,18 @@ int main()
                     printf("\n>> Axis B: ");
                     scanf("%lf", &axis_b);
                     while(getchar() != '\n');
-                    
+
                     // If input is invalid
                     if(axis_b <= 0)
                     {
                         int choice = 0;
-                        
+
                         printf("\nYou entered an invalid input!\n\n");
                         printf("\n1. Try again\n");
                         printf("\n(Enter any other value to return to the main menu)\n");
                         printf("\n>> Enter choice: ");
                         scanf("%s", &choice);
-                        
+
                         // Return to main menu
                         if(choice != 49)
                         {
@@ -1735,7 +1858,7 @@ int main()
                     }
                 }
             }
-            
+
             // Only ask for unit if both unit_flag and valid are true
             if(unit_flag == 1 && valid == 1)
             {
@@ -1752,7 +1875,7 @@ int main()
                 printf("\n(Enter any other value for non-units)\n");
                 printf("\n>> Enter choice: ");
                 scanf("%s", &area_unit);
-                
+
                 // Check if it has a unit or a non-unit
                 if(area_unit >= 49 ^ area_unit <= 56)
                 {
@@ -1760,7 +1883,7 @@ int main()
                     unit_flag = 0;
                 }
             }
-            
+
             // Preview given before calculation
             if(unit_flag == 1 && valid == 1)
             {
@@ -1796,14 +1919,14 @@ int main()
                 printf("\nArea: %lf", area);
                 printf("\n#############################\n");
             }
-            
+
             // Continue?
             if(valid == 1)
             {
                 printf("\n\n1. Calculate another\n");
                 printf("\n\(Enter any other character to exit\)\n");
                 printf("\n>> Enter choice: ");
-    
+
                 scanf("%s", &flag);
             }
         }
