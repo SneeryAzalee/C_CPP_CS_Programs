@@ -101,8 +101,39 @@ int main()
                 sum += decimal_digits[j] * pow(2, index--);
             }
             
+            // Convert output double into string
+            sprintf(s_input, "%lf", sum);
+            
+            // Get decimal digit count of output to eliminate trailing zeros
+            decimal_mode = 0;
+            null_count = 0;
+            decimal_digit_count = 0;
+            for(int j = 0; j < strlen(s_input); j++)
+            {
+                if(decimal_mode == 1)
+                {
+                    if(s_input[j] == '0')
+                    {
+                        null_count++;
+                    }
+                    else
+                    {
+                        decimal_digit_count += null_count + 1;
+                        null_count = 0;
+                    }
+                }
+                // If it detects a period(.), switch to decimal mode
+                else if(decimal_mode == 0)
+                {
+                    if(s_input[j] == '.')
+                    {
+                        decimal_mode = 1;
+                    }
+                }
+            }
+            
             // Print sum / output
-            printf("%lf ", sum);
+            printf("%.*lf ", decimal_digit_count, sum);
         }
     }
     
