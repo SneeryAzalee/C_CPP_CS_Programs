@@ -102,7 +102,7 @@ int main()
             }
             
             // Convert output double into string
-            sprintf(s_input, "%lf", sum);
+            sprintf(s_input, "%.12lf", sum);
             
             // Get decimal digit count of output to eliminate trailing zeros
             decimal_mode = 0;
