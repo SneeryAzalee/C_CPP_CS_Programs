@@ -1,8 +1,8 @@
+// LeetCode Problem 2 : https://leetcode.com/problems/add-two-numbers/description/
+
 #include <iostream>
 
 using namespace std;
-
-// LeetCode Problem: https://leetcode.com/problems/add-two-numbers/description/
 
 struct ListNode
 {
@@ -10,100 +10,126 @@ struct ListNode
     ListNode *next;
 };
 
-
 class Solution
 {
     public:
-    
+       
+        void insertValues(int val, ListNode *&tempList)
+        {
+            ListNode *newNode = new ListNode;
+            newNode->val = val;
+            newNode->next = nullptr;
+            
+            if(tempList == nullptr)
+            {
+                tempList = newNode;
+                return;
+            }
+            
+            ListNode *current = tempList;
+            while(current->next != nullptr)
+            {
+                current = current->next;
+            }
+            current->next = newNode;
+        }
+        
         ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
         {
-            int digit1, digit2, carry = 0;
-            ListNode *result = nullptr, *selector = nullptr;
+            ListNode *result = nullptr;
+            ListNode *highest = nullptr;
+            ListNode *lowest = nullptr;
+            ListNode *l1Backup = l1;
+            ListNode *l2Backup = l2;
+            int excess = 0, l1Nodes = 0, l2Nodes = 0;
             
-            while(l1 &&)
+            while(l1 != nullptr)
             {
-                
+                l1Nodes++;
+                l1 = l1->next;
             }
             
-            cout << "\n\nResult: ";
-            selector = result;
-            while(selector)
+            while(l2 != nullptr)
             {
-                cout << selector->val;
-                selector = selector->next;
+                l2Nodes++;
+                l2 = l2->next;
             }
-            cout << "\n\n";
             
+            highest = (l1Nodes > l2Nodes) ? l1Backup : l2Backup;
+            lowest = (l1Nodes <= l2Nodes) ? l1Backup : l2Backup;
+            
+            while(highest != nullptr)
+            {
+                if(lowest != nullptr)
+                {
+                    int output = highest->val + lowest->val + ((excess > 0) ? (excess--) : (excess));
+                    if(output >= 10)
+                    {
+                        output -= 10;
+                        excess++;
+                    }
+                    insertValues(output, result);
+                    lowest = lowest->next;
+                }
+                else
+                {
+                    int output = highest->val + ((excess > 0) ? (excess--) : (excess));
+                    if(output >= 10)
+                    {
+                        output -= 10;
+                        excess++;
+                    }
+                    insertValues(output, result);
+                }
+                highest = highest->next;
+            }
+            
+            if(excess > 0)
+            {
+                insertValues(excess, result);
+            }
             
             return result;
         }
 };
 
-
 int main()
 {
-    int input_count, input;
-    
     ListNode *l1 = nullptr;
-    ListNode *selector = nullptr;
-    
-    Solution linkedlists;
-    
-    cout << "Enter number of inputs for L1: ";
-    cin >> input_count;
-    cout << "\nL1: ";
-    
-    for(int i = 0; i < input_count; i++)
-    {
-        cin >> input;
-        
-        ListNode *new_node = new ListNode;
-        new_node->val = input;
-        new_node->next = nullptr;
-        
-        if(!l1)
-        {
-            l1 = new_node;
-            selector = new_node;
-        }
-        else
-        {
-            selector->next = new_node;
-            selector = new_node;
-        }
-    }
-    
-    cout << "\n\n";
-    
     ListNode *l2 = nullptr;
-    selector = nullptr;
+    ListNode *sum = nullptr;
+    Solution solution;
+    string input;
     
-    cout << "Enter number of inputs for L2: ";
-    cin >> input_count;
-    cout << "\nL2: ";
-    
-    for(int i = 0; i < input_count; i++)
+    cout << "\nEnter 1st set of digits:\n\n>> ";
+    getline(cin, input);
+    for(int i = 0; i < input.length(); i++)
     {
-        cin >> input;
-        
-        ListNode *new_node = new ListNode;
-        new_node->val = input;
-        new_node->next = nullptr;
-        
-        if(!l2)
+        if(isdigit(input[i]))
         {
-            l2 = new_node;
-            selector = new_node;
-        }
-        else
-        {
-            selector->next = new_node;
-            selector = new_node;
+            solution.insertValues((input[i] - '0'), l1);
         }
     }
     
-    linkedlists.addTwoNumbers(l1, l2);
+    cout << "\nEnter 2nd set of digits:\n\n>> ";
+    getline(cin, input);
+    for(int i = 0; i < input.length(); i++)
+    {
+        if(isdigit(input[i]))
+        {
+            solution.insertValues((input[i] - '0'), l2);
+        }
+    }
     
+    sum = solution.addTwoNumbers(l1, l2);
+    
+    cout << "\nSum of all sets:\n\n>> ";
+    while(sum != nullptr)
+    {
+        cout << sum->val << " ";
+        sum = sum->next;
+    }
+    cout << "\n";
     
     return 0;
 }
