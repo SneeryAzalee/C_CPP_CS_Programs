@@ -94,7 +94,7 @@ class ModifyOutput : public HappyUnhappy
             {
                 for(int j = 0; j < mainInput.length(); j++)
                 {
-                    if(mainInput[i] == mainInput[j] && i != j && mainInput[i] != '-')
+                    if(mainInput[i] == mainInput[j] && i != j && mainInput[i] != '\a')
                     {
                         mainInput[i] = '\a';
                         mainInput[j] = '\a';
