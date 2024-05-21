@@ -9,12 +9,26 @@ class Sneery
 {
     public:
     
+        // Main Input
         int A = 0;
+        // 4-BIT Memory
         int B = 0;
         int C = 0;
         int D = 0;
         int E = 0;
-        int DISPLAY;
+        // Decimal Representation
+        int UNITS;
+        int TENS;
+        // Units-Place BITS
+        int U1;
+        int U2;
+        int U3;
+        int U4;
+        // Tens-Place BITS
+        int T1 = 0;
+        int T2 = 0;
+        int T3 = 0;
+        int T4;
         
         void execute()
         {
@@ -28,13 +42,26 @@ class Sneery
                     A -= '0';
                 }
                 
-                DISPLAY = 0;
-                DISPLAY += (E) ? 1 : 0;
-                DISPLAY += (D) ? 2 : 0;
-                DISPLAY += (C) ? 4 : 0;
-                DISPLAY += (B) ? 8 : 0;
+                // U1 = BC`D`
+                U1 = ((B && !C && !D)) ? 1 : 0;
+                // U2 = B`C + CD
+                U2 = ((!B && C) || (C && D)) ? 1 : 0;
+                // U3 = B`D + BCD`
+                U3 = ((!B && D) || (B && C && !D)) ? 1 : 0;
+                // U4 = E
+                U4 = (E) ? 1 : 0;
+                // T4 = BC + BD
+                T4 = ((B && C) || (B && D)) ? 1 : 0;
                 
-                cerr << "BIT: " << B << C << D << E << " (" << DISPLAY << ")  |  INPUT: " << A << "\n\n>> ";
+                TENS = 0;
+                UNITS = 0;
+                TENS += (T4) ? 1 : 0;
+                UNITS += (U4) ? 1 : 0;
+                UNITS += (U3) ? 2 : 0;
+                UNITS += (U2) ? 4 : 0;
+                UNITS += (U1) ? 8 : 0;
+                
+                cerr << "BIT: " << B << C << D << E << "  |  INPUT: " << A << "\n\n(" << T1 << T2 << T3 << T4 << " " << U1 << U2 << U3 << U4 << ") (" << TENS << UNITS << ")\n\n>> ";
                 
                 // E = B'D'E' + B'CE' + CD'E' + BC'D + AB'C' + ACD' + ABD
                 int tempE = ((!B && !D && !E) || (!B && C && !E) || (C && !D && !E) || (B && !C && D) || (A && !B && !C) || (A && C && !D) || (A && B && D)) ? 1 : 0;
