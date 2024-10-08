@@ -1,37 +1,8 @@
-name: Update File Count in README
-
-on:
-  push:  
-    branches:
-      - '**'  # Trigger on any push to any branch
-
-jobs:
-  update-readme:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Count Files
-        id: file_count
-        run: |
-          FILE_COUNT=$(git ls-files | wc -l)
-          echo "file_count=$FILE_COUNT" >> $GITHUB_ENV
-
-      - name: Update README
-        run: |
-          sed -i "s/This repository contains .*/This repository contains **${{ env.file_count }}** files./" README.md
-          # Check if there are changes before committing
-          if ! git diff --quiet; then
-            echo "Changes detected in README.md"
-            git add README.md
-            git commit -m "Update file count in README"
-          else
-            echo "No changes to commit."
-          fi
-
-      - name: Push Changes
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git push origin HEAD:${GITHUB_REF}
+            - name: Count the number of files
+  # You may pin to the exact commit or the version.
+  # uses: omagdy7/count_files@d371bfe92cc55dd5f28d7f833db26d2f8a1f7468
+  uses: omagdy7/count_files@v1.0
+  with:
+    # path to the directory
+    path: # default is ./
+          
