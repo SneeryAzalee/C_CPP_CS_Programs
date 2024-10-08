@@ -1,9 +1,9 @@
 name: Update File Count in README
 
 on:
-  push:
+  push:   # Trigger on any push, regardless of branch
     branches:
-      - main
+      - '**'  # This wildcard makes it trigger on any branch
 
 jobs:
   update-readme:
