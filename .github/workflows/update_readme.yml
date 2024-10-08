@@ -1,8 +1,0 @@
-            - name: Count the number of files
-  # You may pin to the exact commit or the version.
-  # uses: omagdy7/count_files@d371bfe92cc55dd5f28d7f833db26d2f8a1f7468
-  uses: omagdy7/count_files@v1.0
-  with:
-    # path to the directory
-    path: # default is ./
-          
