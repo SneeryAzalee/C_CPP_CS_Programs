@@ -13,10 +13,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Count Files
-        run: echo "File count: $(git ls-files | wc -l)" > filecount.txt
+        id: file_count
+        run: |
+          FILE_COUNT=$(git ls-files | wc -l)
+          echo "file_count=$FILE_COUNT" >> $GITHUB_ENV
 
       - name: Update README
-        run: sed -i 's/This repository contains .*/This repository contains **$(cat filecount.txt)** files./' README.md
+        run: |
+          sed -i "s/This repository contains .*/This repository contains **${{ env.file_count }}** files./" README.md
 
       - name: Commit Changes
         run: |
